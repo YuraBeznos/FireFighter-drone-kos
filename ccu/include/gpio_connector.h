@@ -8,7 +8,7 @@
 #include <memory>
 
 #define HW_MODULE_NAME  "gpio0"
-#define HW_MODULE_CFG   "raspberry_pi4b.default"
+#define HW_MODULE_CFG   "rpi4_bcm2711.default"
 #define GPIO_HIGH_LEVEL 1
 #define GPIO_LOW_LEVEL  0
 

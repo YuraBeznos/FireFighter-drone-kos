@@ -13,6 +13,9 @@ use EDL ffd.KlogStorageEntity
 use EDL kl.VfsRamFs
 use EDL kl.VfsSdCardFs
 use EDL kl.VfsNet
+use EDL kl.EntropyEntity
+use EDL kl.drivers.DNetSrv
+use EDL kl.drivers.Bcm2711MboxArmToVc
 
 request src=ffd.KlogEntity dst=ffd.KlogStorageEntity interface=kl.KlogStorage method=write { grant () }
 response src=ffd.KlogStorageEntity dst=ffd.KlogEntity interface=kl.KlogStorage method=write { grant () }
@@ -305,6 +308,16 @@ response src = kl.core.Core, dst = kl.VfsNet
     grant()
 }
 
+request src = kl.VfsNet, dst = kl.drivers.DNetSrv
+{
+    grant()
+}
+
+response src = kl.drivers.DNetSrv, dst = kl.VfsNet
+{
+    grant()
+}
+
 // kl.VfsRamFs
 request src = kl.VfsRamFs, dst = kl.core.Core
 {
@@ -358,4 +371,57 @@ response src = kl.VfsRamFs, dst = kl.rump.Dhcpcd
     grant()
 }
 
+// kl.EntropyEntity
+request src = kl.EntropyEntity, dst = kl.core.Core
+{
+    grant()
+}
+
+response src = kl.core.Core, dst = kl.EntropyEntity
+{
+    grant()
+}
+
+request interface = kl.Entropy, dst = kl.EntropyEntity
+{
+    grant()
+}
+
+response interface = kl.Entropy, src = kl.EntropyEntity
+{
+    grant()
+}
+
+// kl.drivers.DNetSrv
+request src = kl.drivers.DNetSrv, dst = kl.core.Core
+{
+    grant()
+}
+
+response src = kl.core.Core, dst = kl.drivers.DNetSrv
+{
+    grant()
+}
+
+
+// kl.drivers.Bcm2711MboxArmToVc
+request src = kl.drivers.Bcm2711MboxArmToVc, dst = kl.core.Core
+{
+    grant()
+}
+
+response src = kl.core.Core, dst = kl.drivers.Bcm2711MboxArmToVc
+{
+    grant()
+}
+
+request src = kl.drivers.DNetSrv, dst = kl.drivers.Bcm2711MboxArmToVc
+{
+    grant()
+}
+
+response src = kl.drivers.Bcm2711MboxArmToVc, dst = kl.drivers.DNetSrv
+{
+    grant()
+}
 
